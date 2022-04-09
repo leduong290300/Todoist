@@ -109,7 +109,7 @@ export default {
   }
 };
 </script>
-<style lang="css">
+<style lang="css" scoped>
 .badger {
   display: inline-block;
   padding: 0.35em 0.65em;

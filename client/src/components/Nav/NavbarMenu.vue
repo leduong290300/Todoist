@@ -52,16 +52,16 @@ export default {
 };
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
 .navbar-left {
   display: flex;
   align-items: center;
 }
-.logo {
+.navbar-left .logo {
   width: 32px;
   height: 32px;
 }
-.navbar-link__list .navbar-link__items a {
+.navbar-left .navbar-link__list .navbar-link__items a {
   color: #fff;
   text-decoration: none;
 }
@@ -70,13 +70,13 @@ export default {
   display: flex;
   justify-content: flex-end;
 }
-.navbar-list {
+.navbar-right .navbar-list {
   list-style: none;
 }
-.navbar-items a {
+.navbar-right .navbar-items a {
   color: #fff;
 }
-.navbar-icon {
+.navbar-right .navbar-icon {
   width: 32px;
   height: 32px;
 }
