@@ -33,18 +33,48 @@ export default {
   },
   data() {
     return {
-      todos: null,
+      todos: null
     };
   },
   computed: {
-    ...mapGetters("Todo", ["getAllTodos"]),
+    ...mapGetters("Todo", ["getAllTodos"])
   },
   methods: {
-    ...mapActions("Todo", ["onReadPost"]),
-  },
+    ...mapActions("Todo", ["onReadPost"])
+  }
 };
 </script>
 
-<style lang="scss" scoped>
-@import "./DashboardView.scss";
+<style lang="css" scoped>
+.action-button {
+  padding-top: 0;
+  background: transparent;
+  border: none;
+  position: fixed;
+  right: 3rem;
+  bottom: 3rem;
+  background: transparent;
+  border: none;
+}
+.action-button:hover {
+  background: transparent;
+}
+.action-button__icons {
+  width: 60px;
+  height: 60px;
+}
+button.action-button.btn:focus,
+button.action-button.btn:active {
+  outline: none;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+a.action-button.btn:focus,
+a.action-button.btn:active {
+  outline: none;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
 </style>

@@ -43,12 +43,12 @@ import { mapActions } from "vuex";
 export default {
   name: "LoginView",
   components: {
-    ErrorMessage,
+    ErrorMessage
   },
   data() {
     return {
       forms: { username: "", password: "" },
-      errorNotif: [],
+      errorNotif: []
     };
   },
   methods: {
@@ -86,10 +86,68 @@ export default {
         this.onHandleLogin({ username, password });
         this.errorNotif = [];
       }
-    },
-  },
+    }
+  }
 };
 </script>
-<style lang="scss">
-@import "./FormView.scss";
+<style lang="css">
+.landing {
+  position: relative;
+  background: url("../../assets/landing.jpg") no-repeat center center/cover;
+  height: 100vh;
+}
+.dark-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100%;
+}
+.landing-inner {
+  height: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+form {
+  width: 30%;
+}
+.alert {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.alert-icon:hover {
+  cursor: pointer;
+}
+
+h1,
+h4,
+p {
+  color: white;
+}
+.tabs {
+  width: 30%;
+}
+.nav-tabs {
+  width: 100%;
+  background: transparent;
+}
+.nav-item {
+  width: 50%;
+  padding: 10px;
+  margin: 10px 0;
+}
+.nav-link {
+  color: #fff;
+  border-radius: 20px;
+}
+.nav-link:hover {
+  border-color: transparent;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.6);
+}
+.active {
+  background: rgb(198, 246, 213);
+  color: rgb(39, 103, 73);
+}
 </style>

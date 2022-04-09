@@ -16,7 +16,7 @@
               ? cardsSuccess
               : todo.status === 'Đang học'
               ? cardsWarning
-              : cardsDanger,
+              : cardsDanger
           ]"
         >
           <b-row>
@@ -28,7 +28,7 @@
                     ? badgerSuccess
                     : todo.status === 'Đang học'
                     ? badgerWarning
-                    : badgerDanger,
+                    : badgerDanger
                 ]"
                 >{{ todo.status }}</span
               >
@@ -90,11 +90,11 @@ export default {
       badgerDanger: "badger-danger",
       cardsSuccess: "cards-success",
       cardsWarning: "cards-warning",
-      cardsDanger: "cards-danger",
+      cardsDanger: "cards-danger"
     };
   },
   computed: {
-    ...mapGetters("Todo", ["getTodoById"]),
+    ...mapGetters("Todo", ["getTodoById"])
   },
   methods: {
     ...mapActions("Todo", ["onDeletePost", "onFindIdPost"]),
@@ -105,10 +105,77 @@ export default {
 
     onFindId(postId) {
       this.onFindIdPost(postId);
-    },
-  },
+    }
+  }
 };
 </script>
-<style lang="scss">
-@import "./PostList.scss";
+<style lang="css">
+.badger {
+  display: inline-block;
+  padding: 0.35em 0.65em;
+  font-size: 0.75em;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25rem;
+}
+.badger-success {
+  background: #28a745;
+}
+.badger-danger {
+  background: #dc3545;
+}
+.badger-warning {
+  background: #ffc107;
+}
+
+.cards {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+}
+.cards-success {
+  border: 1px solid #28a745;
+}
+.cards-danger {
+  border: 1px solid #dc3545;
+}
+.cards-warning {
+  border: 1px solid #ffc107;
+}
+.action-button {
+  padding-top: 0;
+  background: transparent;
+  border: none;
+}
+.action-button:hover {
+  background: transparent;
+}
+.action-button__icons {
+  width: 24px;
+  height: 24px;
+}
+button.action-button.btn:focus,
+button.action-button.btn:active {
+  outline: none;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+a.action-button.btn:focus,
+a.action-button.btn:active {
+  outline: none;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
 </style>

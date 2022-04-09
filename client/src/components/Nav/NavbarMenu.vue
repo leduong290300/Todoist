@@ -39,7 +39,7 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   name: "NavbarMenu",
   computed: {
-    ...mapGetters("Auth", ["getUsername"]),
+    ...mapGetters("Auth", ["getUsername"])
   },
 
   methods: {
@@ -47,11 +47,37 @@ export default {
 
     handleLogoutUser() {
       this.onHandleLogout();
-    },
-  },
+    }
+  }
 };
 </script>
 
-<style lang="scss">
-@import "./NavbarMenu.scss";
+<style lang="css">
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+.logo {
+  width: 32px;
+  height: 32px;
+}
+.navbar-link__list .navbar-link__items a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.navbar-right {
+  display: flex;
+  justify-content: flex-end;
+}
+.navbar-list {
+  list-style: none;
+}
+.navbar-items a {
+  color: #fff;
+}
+.navbar-icon {
+  width: 32px;
+  height: 32px;
+}
 </style>
