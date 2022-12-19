@@ -11,6 +11,10 @@ import * as directives from "vuetify/directives";
 import "@mdi/font/css/materialdesignicons.css";
 import { mdi } from "vuetify/lib/iconsets/mdi";
 
+//Datepicker
+import Date_picker from "@vuepic/vue-datepicker";
+import "@vuepic/vue-datepicker/dist/main.css";
+
 const vuetify = createVuetify({
   components,
   directives,
@@ -21,5 +25,7 @@ const vuetify = createVuetify({
     },
   },
 });
-
-createApp(App).use(vuetify).mount("#app");
+const app = createApp(App);
+app.component("Date_picker", Date_picker);
+app.use(vuetify);
+app.mount("#app");
