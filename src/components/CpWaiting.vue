@@ -7,15 +7,38 @@
         variant="tonal"
       >
         <v-card-actions class="justify-center">
-          <v-btn prepend-icon="mdi-plus" variant="flat" color="secondary">
+          <v-btn
+            prepend-icon="mdi-plus"
+            variant="flat"
+            color="secondary"
+            @click="isToogleDialog(true)"
+          >
             Thêm mới
           </v-btn>
         </v-card-actions>
       </v-card>
     </v-col>
   </v-row>
+  <CpDialog :visible="isShow" @close="isToogleDialog(false)" />
 </template>
 <script>
-export default {};
+import CpDialog from "./CpDialog.vue";
+import { mapState, mapActions } from "vuex";
+
+export default {
+  /**Components */
+  components: {
+    CpDialog,
+  },
+  /**Computed */
+  computed: mapState({
+    isShow: (state) => state.status.isShow,
+  }),
+
+  /**Methods */
+  methods: {
+    ...mapActions("status", ["isToogleDialog"]),
+  },
+};
 </script>
 <style></style>

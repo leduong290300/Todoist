@@ -4,11 +4,12 @@
     class="container"
     :style="{ padding: layout.padding + 'px' }"
   >
-    <CpDashboard />
+    <RouterView />
   </v-container>
 </template>
 <script>
-import CpDashboard from "./views/CpDashboard.vue";
+import { RouterView } from "vue-router";
+import router from "./router";
 export default {
   /*Create data */
   data() {
@@ -18,9 +19,14 @@ export default {
       },
     };
   },
-  /*Import component */
+
   components: {
-    CpDashboard,
+    RouterView,
+  },
+
+  //*Hooks
+  created() {
+    router.push("/login");
   },
 };
 </script>

@@ -24,23 +24,22 @@
         </v-btn>
       </v-card-actions>
     </v-card>
-    <CpDialog :visible="dialog" @close="dialog = false" />
+    <CpDialog :visible="showDialog" @close="onCloseDialog" />
   </v-col>
 </template>
 <script>
 import CpDialog from "./CpDialog.vue";
 export default {
-  /*Create data */
-  data() {
-    return {
-      dialog: false,
-    };
-  },
-
   /**Components */
   components: {
     CpDialog,
   },
+
+  /**Computed */
+  computed: {},
+
+  /**Method */
+  methods: {},
 };
 </script>
 <style></style>

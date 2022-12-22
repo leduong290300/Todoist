@@ -4,31 +4,36 @@
       <CpTaskitems />
       <v-btn
         color="secondary"
-        @click="dialog = true"
+        @click="isToogleDialog(true)"
         prepend-icon="mdi-plus"
         variant="flat"
       >
         Thêm mới
       </v-btn>
-      <CpDialog :visible="dialog" @close="dialog = false" />
+      <CpDialog :visible="isShow" @close="isToogleDialog(false)" />
     </v-col>
   </v-row>
 </template>
 <script>
 import CpTaskitems from "./CpTaskitems.vue";
 import CpDialog from "./CpDialog.vue";
-export default {
-  /*Create data */
-  data() {
-    return {
-      dialog: false,
-    };
-  },
+import { mapState, mapActions } from "vuex";
 
+export default {
   /**Components */
   components: {
     CpTaskitems,
     CpDialog,
+  },
+
+  /**Computed */
+  computed: mapState({
+    isShow: (state) => state.status.isShow,
+  }),
+
+  /**Method */
+  methods: {
+    ...mapActions("status", ["isToogleDialog"]),
   },
 };
 </script>
