@@ -1,15 +1,9 @@
 <template>
-  <v-container
-    fluid
-    class="container"
-    :style="{ padding: layout.padding + 'px' }"
-  >
-    <v-app>
-      <CpHeader />
-      <CpMain />
-      <CpFooter />
-    </v-app>
-  </v-container>
+  <v-app>
+    <CpHeader />
+    <CpMain />
+    <CpFooter />
+  </v-app>
 </template>
 <script>
 import CpHeader from "../components/CpHeader.vue";
@@ -21,14 +15,6 @@ export default {
     CpHeader,
     CpMain,
     CpFooter,
-  },
-  /*Create data */
-  data() {
-    return {
-      layout: {
-        padding: 0,
-      },
-    };
   },
 };
 </script>

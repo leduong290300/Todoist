@@ -5,13 +5,51 @@ const router = createRouter({
   routes: [
     {
       path: "/",
-      name: "dashboard",
-      component: () => import("../views/DashboardView.vue"),
+      name: "Dashboard",
+      component: () => import("../layouts/LayoutPage.vue"),
+      children: [
+        {
+          path: "",
+          name: "DashboardView",
+          component: () => import("../views/DashboardView.vue"),
+        },
+      ],
     },
     {
       path: "/login",
-      name: "login",
-      component: () => import("../views/FormView.vue"),
+      name: "Login",
+      component: () => import("../layouts/LayoutForm.vue"),
+      children: [
+        {
+          path: "",
+          name: "LoginView",
+          component: () => import("../views/LoginView.vue"),
+        },
+      ],
+    },
+    {
+      path: "/register",
+      name: "Register",
+      component: () => import("../layouts/LayoutForm.vue"),
+      children: [
+        {
+          path: "",
+          name: "RegisterView",
+          component: () => import("../views/RegisterView.vue"),
+        },
+      ],
+    },
+    {
+      path: "/reset_password",
+      name: "Reset",
+      component: () => import("../layouts/LayoutForm.vue"),
+      children: [
+        {
+          path: "",
+          name: "ResetPasswordView",
+          component: () => import("../views/ResetPasswordView.vue"),
+        },
+      ],
     },
   ],
 });

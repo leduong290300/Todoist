@@ -13,7 +13,7 @@ const state = () => ({
 //*Getters
 const getters = {
   isAuthentication: (state) => {
-    return state.isAuthentacated;
+    return state.isAuthenticated;
   },
 };
 
