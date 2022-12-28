@@ -1,11 +1,11 @@
 <template>
   <v-card>
-    <v-form v-model="valid">
+    <v-form v-model="valid" lazy-validation>
       <v-container>
         <v-row>
           <v-col cols="12" md="6">
             <v-text-field
-              v-model="firstname"
+              v-model="form.firstName"
               :rules="nameRules"
               :counter="10"
               label="Họ"
@@ -15,7 +15,7 @@
 
           <v-col cols="12" md="6">
             <v-text-field
-              v-model="lastname"
+              v-model="form.lastName"
               :rules="nameRules"
               :counter="10"
               label="Tên"
@@ -25,7 +25,7 @@
 
           <v-col cols="12" md="12">
             <v-text-field
-              v-model="email"
+              v-model="form.email"
               :rules="emailRules"
               label="E-mail"
               required
@@ -33,16 +33,24 @@
           </v-col>
           <v-col cols="12" md="12">
             <v-text-field
-              v-model="email"
-              :rules="emailRules"
+              v-model="form.password"
+              :rules="[passwordRules.required, passwordRules.typePassword]"
               label="Mật khẩu"
+              :append-icon="showIcon ? 'mdi-eye' : 'mdi-eye-off'"
+              :type="showIcon ? 'text' : 'password'"
+              counter
+              @click:append="showIcon = !showIcon"
               required
             ></v-text-field>
           </v-col>
           <v-col cols="12" md="12">
             <v-text-field
-              v-model="email"
-              :rules="emailRules"
+              v-model="form.password_confirmation"
+              :rules="[passwordRules.required, passwordNotMatch]"
+              :append-icon="showIcon ? 'mdi-eye' : 'mdi-eye-off'"
+              :type="showIcon ? 'text' : 'password'"
+              counter
+              @click:append="showIcon = !showIcon"
               label="Nhập lại mật khẩu"
               required
             ></v-text-field>
@@ -55,7 +63,7 @@
             <p>
               Đã có tài khoản ? <router-link to="/login">Đăng nhập</router-link>
             </p>
-            <v-btn color="secondary">Đăng ký</v-btn>
+            <v-btn :disabled="!valid" color="success">Đăng ký</v-btn>
           </v-col>
         </v-row>
       </v-container>
@@ -64,21 +72,40 @@
 </template>
 <script>
 export default {
-  data() {
-    return {
-      valid: false,
-      firstname: "",
-      lastname: "",
-      nameRules: [
-        (v) => !!v || "Name is required",
-        (v) => v.length <= 10 || "Name must be less than 10 characters",
-      ],
+  data: () => ({
+    valid: true,
+    showIcon: false,
+    form: {
+      firstName: "",
+      lastName: "",
       email: "",
-      emailRules: [
-        (v) => !!v || "E-mail is required",
-        (v) => /.+@.+/.test(v) || "E-mail must be valid",
-      ],
-    };
+      password: "",
+      password_confirmation: "",
+    },
+    nameRules: [
+      (v) => !!v || "Tên không được để trống",
+      (v) => v.length <= 10 || "Tên phải ít hơn 10 ký tự",
+    ],
+    emailRules: [
+      (v) => !!v || "E-mail không được để trống",
+      (v) =>
+        /^(([^<>()[\]\\.,;:\s@']+(\.[^<>()\\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+          v
+        ) || "E-mail không hợp lệ",
+    ],
+    passwordRules: {
+      required: (v) => !!v || "Mật khẩu không được để trống",
+      typePassword: (v) =>
+        /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/.test(v) ||
+        "Mật khẩu phải chứa ít nhất một chữ thường, một số, một ký tự đặc biệt và một chữ hoa",
+    },
+  }),
+  computed: {
+    passwordNotMatch() {
+      return () =>
+        this.form.password === this.form.password_confirmation ||
+        "Mật khẩu không khớp";
+    },
   },
 };
 </script>

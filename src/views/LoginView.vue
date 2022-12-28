@@ -1,11 +1,11 @@
 <template>
   <v-card>
-    <v-form v-model="valid">
+    <v-form v-model="valid" lazy-validation>
       <v-container>
         <v-row>
           <v-col cols="12" md="12">
             <v-text-field
-              v-model="email"
+              v-model="form.email"
               :rules="emailRules"
               label="E-mail"
               required
@@ -13,8 +13,12 @@
           </v-col>
           <v-col cols="12" md="12">
             <v-text-field
-              v-model="email"
-              :rules="emailRules"
+              v-model="form.password"
+              :append-icon="showIcon ? 'mdi-eye' : 'mdi-eye-off'"
+              :rules="passwordRules"
+              :type="showIcon ? 'text' : 'password'"
+              counter
+              @click:append="showIcon = !showIcon"
               label="Mật khẩu"
               required
             ></v-text-field>
@@ -33,7 +37,9 @@
               <router-link to="/reset_password">Quên mật khẩu ?</router-link>
             </p>
           </v-col>
-          <v-col><v-btn color="secondary">Đăng nhập</v-btn></v-col>
+          <v-col
+            ><v-btn :disabled="!valid" color="success">Đăng nhập</v-btn></v-col
+          >
         </v-row>
       </v-container>
     </v-form>
@@ -43,20 +49,33 @@
 export default {
   data() {
     return {
-      valid: false,
-      firstname: "",
-      lastname: "",
-      nameRules: [
-        (v) => !!v || "Name is required",
-        (v) => v.length <= 10 || "Name must be less than 10 characters",
-      ],
-      email: "",
+      form: {
+        email: "",
+        password: "",
+      },
+      valid: true,
+      showIcon: false,
       emailRules: [
-        (v) => !!v || "E-mail is required",
-        (v) => /.+@.+/.test(v) || "E-mail must be valid",
+        (v) => !!v || "E-mail không được để trống",
+        (v) =>
+          /^(([^<>()[\]\\.,;:\s@']+(\.[^<>()\\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+            v
+          ) || "E-mail không hợp lệ",
+      ],
+      passwordRules: [
+        (v) => !!v || "Mật khẩu không được để trống",
+        (v) =>
+          /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/.test(v) ||
+          "Mật khẩu phải chứa ít nhất một chữ thường, một số, một ký tự đặc biệt và một chữ hoa",
       ],
     };
   },
 };
 </script>
-<style></style>
+<style>
+.v-input--horizontal .v-input__append {
+  position: absolute !important;
+  right: 10px !important;
+  margin-inline-start: 0px !important;
+}
+</style>
