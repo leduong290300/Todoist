@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <v-form v-model="valid" lazy-validation>
+    <v-form ref="form" v-model="valid" @submit="handleRegisterAccount">
       <v-container>
         <v-row>
           <v-col cols="12" md="6">
@@ -63,7 +63,9 @@
             <p>
               Đã có tài khoản ? <router-link to="/login">Đăng nhập</router-link>
             </p>
-            <v-btn :disabled="!valid" color="success">Đăng ký</v-btn>
+            <v-btn :disabled="!valid" color="success" type="submit"
+              >Đăng ký</v-btn
+            >
           </v-col>
         </v-row>
       </v-container>
@@ -71,6 +73,8 @@
   </v-card>
 </template>
 <script>
+import { mapMutations } from "vuex";
+import { v4 as uuidv4 } from "uuid";
 export default {
   data: () => ({
     valid: true,
@@ -105,6 +109,28 @@ export default {
       return () =>
         this.form.password === this.form.password_confirmation ||
         "Mật khẩu không khớp";
+    },
+  },
+  methods: {
+    ...mapMutations("auth", { IS_REGISTER_ACCOUNT: "IS_REGISTER_ACCOUNT" }),
+    handleRegisterAccount(e) {
+      e.preventDefault();
+      this.IS_REGISTER_ACCOUNT({
+        id: uuidv4(),
+        firstName: this.form.firstName,
+        lastName: this.form.lastName,
+        email: this.form.email,
+        password: this.form.password,
+        avatarUrl:
+          "https://gravatar.com/avatar/8449d4d080192e59fac40c2669252ba1?s=200&d=robohash&r=x",
+      });
+      this.$refs.form.reset();
+      this.form.firstName = "";
+      this.form.lastName = "";
+      this.form.email = "";
+      this.form.password = "";
+      this.form.avatarUrl = "";
+      this.form.password_confirmation = "";
     },
   },
 };

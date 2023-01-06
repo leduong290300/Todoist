@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <v-form v-model="valid" lazy-validation>
+    <v-form ref="form" v-model="valid" @submit="handleLoginAccount">
       <v-container>
         <v-row>
           <v-col cols="12" md="12">
@@ -38,7 +38,9 @@
             </p>
           </v-col>
           <v-col
-            ><v-btn :disabled="!valid" color="success">Đăng nhập</v-btn></v-col
+            ><v-btn :disabled="!valid" color="success" type="submit"
+              >Đăng nhập</v-btn
+            ></v-col
           >
         </v-row>
       </v-container>
@@ -46,6 +48,7 @@
   </v-card>
 </template>
 <script>
+import { mapMutations } from "vuex";
 export default {
   data() {
     return {
@@ -69,6 +72,20 @@ export default {
           "Mật khẩu phải chứa ít nhất một chữ thường, một số, một ký tự đặc biệt và một chữ hoa",
       ],
     };
+  },
+  methods: {
+    ...mapMutations("auth", { IS_LOGIN_ACCOUNT: "IS_LOGIN_ACCOUNT" }),
+    handleLoginAccount(e) {
+      e.preventDefault();
+      this.IS_LOGIN_ACCOUNT({
+        email: this.form.email,
+        password: this.form.password,
+      });
+      this.$refs.form.reset();
+
+      this.form.email = "";
+      this.form.password = "";
+    },
   },
 };
 </script>
